@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Admin.txt" />
+    <Text Include="anhnen.txt" />
     <Text Include="Phieumuon.txt" />
     <Text Include="Sach.txt" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿#include"xylyacc.h"
 
 
+
 void doc_file(fstream& filein, Admin& ad) {
 	filein >> ad.acc;
 	filein >> ad.pass;
@@ -43,3 +44,4 @@ bool Dang_Nhap_Thanh_Cong(char a[], char p[], Admin& ad) {
 	else
 		return false;
 }
+

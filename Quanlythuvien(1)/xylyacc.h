@@ -15,5 +15,3 @@ void xuat(Admin ad);
 void mo_file(Admin& ad);
 void Dang_Nhap(char a[], char p[]);
 bool Dang_Nhap_Thanh_Cong(char a[], char p[], Admin& ad);
-
-

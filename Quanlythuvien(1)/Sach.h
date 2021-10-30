@@ -16,7 +16,7 @@ struct sach {
 	int ma;
 	string ten;
 	string nxb;
-	double gia;
+	int gia;
 	int nam;
 	int page;
 	DATETIME ngay;
@@ -47,7 +47,7 @@ void doc_1_quyen_sach(ifstream& filein, SACH& s);
 void xuat(SACH& s);
 void xuat_tat_ca_sach(list& l);
 void doc_all_sach(ifstream& filein, LIST& l);
-void ghi_1_quyen_sach(ofstream& fileout, SACH s);
-void nhap_thong_tin_sach(SACH& s);
+void ghi_1_quyen_sach(ofstream& fileout,SACH s, SACH ss);
+void nhap_thong_tin_sach(SACH& s,SACH& ss);
 void giai_phong(LIST& l);
 void quanly_sach();

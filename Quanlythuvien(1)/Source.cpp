@@ -2,22 +2,8 @@
 #include"xylyacc.h"
 #include"Sach.h"
 #include"Phieumuon.h"
-void chuc_nang() {
-	int luachon;
-	cout << "1.Quan Ly Sach" << endl;
-	cout << "2.Quan Ly Phieu Muon" << endl;
-	cin >> luachon;
-	switch (luachon) {
-	case 1:
-		//quanly_sach();
-		break;
-	case 2:
-		//quanly_phieumuon();
-		break;
-	default:
-		break;
-	}
-}
+#include<iomanip>
+
 int main()
 {
 	resizeConsole(1000, 600);
@@ -32,7 +18,7 @@ int main()
 		if (Dang_Nhap_Thanh_Cong(a, p, ad)) {
 			while (menuchinh == true) {
 				textcolor(19);
-				cout << "Lua chon chuc nang" << endl;
+				cout << "Lua chon chuc nang" <<setw(20)<< endl;
 				cout << "1.Quan ly sach" << endl;
 				cout << "2.Quan ly phieu muon" << endl;
 				cout << "Nhan nut bat ky de thoat" << endl;

@@ -55,5 +55,6 @@
     <Text Include="Sach.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="anhnen.txt" />
   </ItemGroup>
 </Project>

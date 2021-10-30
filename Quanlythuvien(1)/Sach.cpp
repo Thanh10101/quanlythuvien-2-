@@ -41,7 +41,6 @@ void doc_file_datetime(ifstream &filein,DATETIME &a) {
 }
 //Hàm đọc dữ liệu sinh viên từ file
 void doc_1_quyen_sach(ifstream& filein, SACH& s) {
-	filein.open("Sach.txt", ios_base::in);
 	filein >> s.ma;
 	filein.seekg(2, 1);
 	getline(filein, s.ten,',');//nhap chuoi
@@ -59,39 +58,45 @@ void doc_1_quyen_sach(ifstream& filein, SACH& s) {
 	filein >> s.status;
 	string x;
 	getline(filein, x);
-	filein.close();
+	
 }
-void nhap_thong_tin_sach(SACH& s) {
-	cout << "Nhap vao ma sach";
-	cin >> s.ma;
+void nhap_thong_tin_sach(SACH &s,SACH& ss) {//can sua
+	//doc_all_sach(filein, l);
+	cout << "Nhap vao ma sach: ";
+	cin >> ss.ma;
+	if (s.ma == ss.ma) {
+		cout << "ma sach bi trung";
+	}
+	else {
 	cin.ignore();
-	cout << "Nhap vao ten sach";
-	getline(cin, s.ten);
-	cout << "Nhap vao nha xuat ban";
-	getline(cin, s.nxb);
-	cout << "Nhap vao gia";
-	cin >> s.gia;
-	cout << "Nhap vao nam";
-	cin >> s.nam;
-	cout << "Nhap vao trang sach";
-	cin >> s.page;
-	cout << "Nhap ngay nhap kho";
-	cin >> s.ngay.ngay >> s.ngay.thang >> s.ngay.nam;
+	cout << "Nhap vao ten sach: ";
+	getline(cin, ss.ten);
+	cout << "Nhap vao nha xuat ban: ";
+	getline(cin, ss.nxb);
+	cout << "Nhap vao gia: ";
+	cin >> ss.gia;
+	cout << "Nhap vao nam: ";
+	cin >> ss.nam;
+	cout << "Nhap vao trang sach: ";
+	cin >> ss.page;
+	cout << "Nhap ngay nhap kho: ";
+	cin >> ss.ngay.ngay >> s.ngay.thang >> s.ngay.nam;
 	cout << "Nhap vao trang thai";
-	cin >> s.status;
+	cin >> ss.status;
+	}
 }
-void ghi_1_quyen_sach(ofstream& fileout, SACH s) {
-	nhap_thong_tin_sach(s);
+void ghi_1_quyen_sach(ofstream& fileout,SACH s, SACH ss) {
+	nhap_thong_tin_sach(s,ss);
 	fileout.open("Sach.txt", ios_base::app);
 	fileout << endl;
-	fileout << s.ma << ", ";
-	fileout << s.ten << ", ";
-	fileout << s.nxb << ", ";
-	fileout << setprecision(3) << s.gia<< ", ";
-	fileout << s.nam << ", ";
-	fileout << s.page << ", ";
-	fileout << s.ngay.ngay << "/" << s.ngay.thang << "/" << s.ngay.nam << ", ";
-	fileout << s.status;
+	fileout << ss.ma << ", ";
+	fileout << ss.ten << ", ";
+	fileout << ss.nxb << ", ";
+	fileout << ss.gia<< ", ";
+	fileout << ss.nam << ", ";
+	fileout << ss.page << ", ";
+	fileout << ss.ngay.ngay << "/" << s.ngay.thang << "/" << s.ngay.nam << ", ";
+	fileout << ss.status;
 	fileout.close();
 }
 void doc_all_sach(ifstream& filein, LIST& l) {//co loi
@@ -108,12 +113,9 @@ void doc_all_sach(ifstream& filein, LIST& l) {//co loi
 
 void xuat(SACH& s) {
 	textcolor(12);
-	cout << s.ma << endl;
-	cout << s.ten << endl;
-	cout << s.nxb << endl;
-	cout << s.ngay.ngay << endl;
-	cout << s.page << endl;
-	cout << s.status << endl;
+	cout << setw(10) << left << s.ma << setw(20) << left << s.ten << setw(20) << left << s.nxb;
+	cout << setw(10) << left << s.gia<< setw(6) << left << s.nam << setw(10) << left << s.page;
+	cout << setw(18) << left << s.status << setw(2) << s.ngay.ngay <<"/"<<s.ngay.thang<<"/"<<s.ngay.nam<< endl;
 	textcolor(7);
 }
 void xuat_tat_ca_sach(list& l) {
@@ -121,7 +123,8 @@ void xuat_tat_ca_sach(list& l) {
 	for (NODE* p = l.head; p != NULL; p=p->next) {
 		xuat(p->data);
 	}
-	//giai_phong(l);
+	giai_phong(l);
+	system("pause");
 }
 //Hàm giải phóng vùng nhớ cho danh sách liên kết
 void giai_phong(LIST& l) {
@@ -136,6 +139,7 @@ void quanly_sach() {
 	int chon1;
 	LIST l;
 	SACH s;
+	SACH ss;
 	InitList(l);
 	ifstream filein;
 	ofstream fileout;
@@ -149,11 +153,20 @@ void quanly_sach() {
 		switch (chon1)
 		{
 		case 1:
+			cout << "\n\n\t\t\t\tThong tin sach co trong thu vien\n\n";
+			textcolor(16);
+			cout << setw(10) << left << "Ma sach" << setw(20) << left << "Ten sach" << setw(20) << left << "Nha xuat ban";
+			cout << setw(10) << left << "Gia" << setw(6) << left << "Nam" << setw(10) << left << "Trang"  
+				<< setw(18)<<left  << "Trang thai" << setw(20) << left << "Ngay nhap kho" << endl;
+			textcolor(7);
+			filein.open("Sach.txt", ios_base::in);
 			doc_all_sach(filein, l);
 			xuat_tat_ca_sach(l);
+			filein.close();
 			break;
 		case 2:
-			//Them_Sach();
+			doc_all_sach(filein, l);
+			ghi_1_quyen_sach(fileout,s, ss);
 			break;
 		case 3:
 			//Xoa_Sach();
